@@ -34,6 +34,23 @@ namespace Command.Bot.Core
             _connection.OnDisconnect += Disconnected;
         }
 
+        public void Disconnect()
+        {
+            if (null == _connection)
+            {
+                return;
+            }
+
+            _connection.Disconnect();
+            _connection = null;
+
+        }
+
+        public bool IsConnected
+        {
+            get { return _connection != null && _connection.IsConnected; }
+        }
+
         private void Disconnected()
         {
             _log.Info("Disconnected");

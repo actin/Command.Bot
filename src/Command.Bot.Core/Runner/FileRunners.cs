@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Command.Bot.Core.Responders;
+using System;
 
 namespace Command.Bot.Core.Runner
 {
@@ -32,9 +33,14 @@ namespace Command.Bot.Core.Runner
             return GetOrCreateFullPath(@"scripts\") + name;
         }
 
+        public static string GetScriptLocation()
+        {
+            return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"scripts\");
+        }
+
         private static string GetOrCreateFullPath(string scripts)
         {
-            var orCreateFullPath = Path.GetFullPath(scripts);
+            var orCreateFullPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, scripts);//   Path.GetFullPath(scripts);
             if (!Directory.Exists(orCreateFullPath))
             {
                 Directory.CreateDirectory(orCreateFullPath);

@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using SlackConnector.Models;
+using System.IO;
+using Command.Bot.Core.Runner;
 
 namespace Command.Bot.Core.Responders
 {
@@ -28,7 +30,7 @@ namespace Command.Bot.Core.Responders
 
         public override BotMessage GetResponse(MessageContext context)
         {
-            return new BotMessage() { Text = string.Format("Hi, You are currently connected to {0}\n\n{1}", GetCurrentMachineInformation(),GetCommands())};
+            return new BotMessage() { Text = string.Format("Hi, You are currently connected to {0}\n\n{1}", GetCurrentMachineInformation(), GetCommands()) };
         }
 
         private string GetCommands()
@@ -56,7 +58,7 @@ namespace Command.Bot.Core.Responders
 
         private string GetCurrentMachineInformation()
         {
-            return string.Format("{0}({1})", Environment.MachineName, Network.GetLocalIPAddress());
+            return string.Format("{0}({1})\n Script Location:{2}", Environment.MachineName, Network.GetLocalIPAddress(), FileRunners.GetScriptLocation() );
         }
 
         #endregion
